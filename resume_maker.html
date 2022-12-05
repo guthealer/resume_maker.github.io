@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<style>
+  body{font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin:0;
+padding:0;}
+
+header{background-color: rgb(226, 96, 96); color: white;
+  width:fit-content;
+position: sticky; top:0px;
+border-radius: 30px;}
+
+header h1{padding: 20px; }
+  #flex{display:flex;
+             justify-content:start;
+            flex-wrap: wrap;}
+   #box1{ min-width:600px;
+  
+   border:0px solid black;
+  text-align: center;
+margin-left:auto;
+margin-right: auto;}    
+   #box2{min-width:fit-content;
+   border:0px black solid;
+  margin-left:0px;
+text-align: center;
+}    
+   
+   #cv_container{display: grid;
+   grid-template-rows:3cm 26cm;
+   grid-template-columns:6cm 15cm;
+  margin: auto;
+  width:21cm;
+           gap:px;
+   border:0px rgb(255, 255, 255) solid;
+   zoom: ;
+   background-color: rgb(235, 235, 235);
+   }
+   
+   .sec{border:0px black solid;}
+   #sec1{grid-column-start:1;
+   grid-column-end: 3;
+   grid-row-start:1;
+   grid-row-end:;}
+
+  #sec1{display: flex;
+    background-color:rgb(26, 166, 184);
+}
+  #sec11{width:15cm;
+  border: 0px black solid;
+
+color:white;
+font-size:30px;
+line-height:20px;}
+
+  #sec12{width:10cm;}
+  #sec12 table{ 
+          float: right;
+      
+}
+#sec12 table tr{text-align: left;
+vertical-align: baseline;}
+
+ label,input,textarea{margin:5px;
+width:200px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-size:16px;
+}
+textarea{height:100px;}
+
+ #address{white-space:pre-wrap;
+text-align: left;}
+#skill{white-space:pre-wrap;}
+
+#edu_table{table-layout: fixed;
+  width:500px;
+margin: auto;}
+
+#side_box{background-color: rgb(194, 191, 187);}
+
+ul li{text-align: left;list-style-type: disc;}
+ul{margin-left:20px;}
+#education_sec,#pro_sec,#exp_sec{display: none; margin-top:80px; line-height:;
+
+word-wrap: break-word;}
+li,td{font-size:18px;
+word-wrap: break-word;}
+#exp_table,#projects{width:500px;
+              word-wrap: break-word;}
+
+#print{text-align: center;
+margin-left: 200px;}
+
+@media only screen and (max-width:700px) {
+  #flex,#cv_container{zoom:0.7;
+  
+overflow: hidden;}
+  
+}
+</style>
+<body>
+  
+  <div id="flex">
+    <div id="box1">
+      <header><h1>RESUME/CV BUILDER</h1></header>
+    
+      <table>
+        <tr>
+          <td><label for="">Full Name</label></td>
+          <td><input type="text" oninput="name_f(this.value)" id="name_f"></td>
+        
+        </tr>
+
+        <tr>
+          <td><label for="">mob.N.</label></td>
+          <td><input type="text" oninput="mob_f(this.value)"></td>
+        </tr>
+
+       <tr>
+          <td><label for="">email</label></td>
+          <td><input type="text" oninput="email_f(this.value)"></td>
+        
+        </tr>
+
+        <tr>
+          <td><label for="">Address</label></td>
+          <td><textarea name="" id="" cols="30" rows="10" oninput="add_f(this.value)" ></textarea></td>
+        
+        </tr>
+<tr>
+  <td><label for="">Add Skills</label></td>
+  <td><textarea name="" cols="30" rows="10" id="add_skill"></textarea></td>
+  <td><button onclick="add_skill_f()">+add</button> <button onclick="remove_skill_f()">Remove</button></td>
+</tr>
+
+ </table>
+
+
+<table>
+  <label for=""><h2>EDUCATION</h2></label>
+ <input type="checkbox" style="width:30px; height:30px;" onclick="edu_check()" id="edu_checkbox">
+
+ <tr>
+  <td><label for="">Qualification</label></td>
+  <td><input type="text" id="edu_td1"></td>
+ 
+ </tr>
+ <tr>
+  <td><label for="">College/university</label></td>
+  <td><input type="text" id="edu_td2"></td>
+  
+ </tr>
+ <tr>
+  <td><label for="">Marks(%)</label></td>
+  <td><input type="text" id="edu_td3"></td>
+  <td><button onclick="edu_f()">Add</button>
+  <button onclick="remove_edu_f()">remove</button></td>
+ </tr>
+ 
+</table>
+
+<table><h2>Experience</h2>
+  <input type="checkbox" name="" id="exp_checkbox" onclick="exp_check()" style="width:30px; height:30px;">
+  <tr>
+    <td><label for="">EXPERIENCE</label></td>
+    <td><textarea name="" id="exp" cols="30" rows="10"></textarea></td>
+    <td><button onclick="exp_f()">Add</button>
+    <button onclick="remove_exp()">remove</button></td>
+  </tr>
+
+  
+</table>
+<table>
+  <h2>Projects</h2>
+  <input type="checkbox" name="" id="pro_checkbox" onclick="pro_check()" style="width:30px; height:30px;">
+  <tr>
+   
+   
+    <td><label for="">PROJECTS</label></td>
+    <td><textarea name="" id="pro" cols="30" rows="10"></textarea></td>
+    <td><button onclick="project_f()">Add</button>
+    <button onclick="remove_pro()">remove</button></td>
+  </tr>
+</table>
+
+
+
+
+     
+
+    </div>
+    <div id="box2">
+           
+      <div id="cv_container">
+                 
+        <section class="sec" id="sec1">
+          <section id="sec11">
+            <h1 id="canditate_name">YOUR NAME</h1>
+          </section>
+
+          <section id="sec12"> 
+           
+         <table>
+          <tr>
+            <td ><b>Mob</b></td>
+            <td id="mob">00000000</td>
+          </tr>
+          <tr>
+            <td> <b>Email</b> </td>
+            <td id="email">00000000</td>
+          </tr>
+          <tr>
+            <td><b>Address</b></td>
+            <td id="address">00000000</td>
+          </tr>
+          
+         </table>
+       
+           
+     
+                 
+          </section>
+        </section>
+
+
+        <section class="sec" id="side_box">
+          <h2>SKILLS</h2>
+          <ul id="skill">
+           
+          </ul>
+        </section>
+        <section class="sec">
+          <div id="education_sec">
+          <h1 >EDUCATION</h1>
+          <table id="edu_table">
+
+          </table>
+          </div>
+
+
+          <div  id="exp_sec">
+             <h2>EXPERIENCE</h2>
+            <ul id="exp_table">
+             
+                
+              
+</ul>
+          </div>
+
+          <div id="pro_sec">
+                  <h1>PROJECTS</h1>
+            <ul id="projects"></ul>
+          </div>
+        </section>
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+  
+  <button onclick="print_f()" id="print">PRINT</button>
+  <script>
+      function name_f(val){
+        document.getElementById('canditate_name').innerHTML=val;
+      }
+
+     
+      function mob_f(val){
+        document.getElementById('mob').innerHTML=val;
+      }
+
+      function email_f(val){
+        document.getElementById('email').innerHTML=val;
+      }
+
+
+      function add_f(val){
+        document.getElementById('address').innerHTML=val;
+      }
+
+      function add_skill_f(){
+        if(document.getElementById('add_skill').value!=''){
+       let skill_li = document.createElement('li');
+       document.getElementById('skill').appendChild(skill_li);
+       skill_li.innerHTML=document.getElementById('add_skill').value;document.getElementById('add_skill').value='';
+
+      }
+  else{
+  
+  }
+
+      }
+
+      function remove_skill_f(){
+        let skill = document.getElementById('skill');
+        skill.removeChild(skill.lastElementChild);
+      }
+    
+      
+      function edu_f(){
+         let edu_table = document.getElementById('edu_table');
+
+         let td1 = document.getElementById('edu_td1');
+         let td2 = document.getElementById('edu_td2');
+         let td3 = document.getElementById('edu_td3');
+
+         let row = document.createElement('tr');
+
+         let rtd1 = document.createElement('td');
+         let rtd2 = document.createElement('td');
+         let rtd3 = document.createElement('td');
+         
+         rtd1.textContent = td1.value;
+         rtd2.textContent = td2.value;
+         rtd3.textContent = td3.value;
+
+         row.appendChild(rtd1);
+         row.appendChild(rtd2);
+         row.appendChild(rtd3);
+         edu_table.appendChild(row);
+rtd1.style.border = '2px black solid';
+rtd2.style.border = '2px black solid';
+rtd3.style.border = '2px black solid';
+edu_table.style.border = '2px black solid';
+edu_table.style.borderCollapse='collapse';
+
+         
+
+      }
+
+
+      function remove_edu_f(){
+        let edu = document.getElementById('edu_table');
+        edu.removeChild(edu.lastElementChild);
+      }
+
+   function edu_check(val){
+    let check=document.getElementById('edu_checkbox');
+    if( check.checked==true){
+      document.getElementById('education_sec').style.display='block';
+    }
+    else{
+      document.getElementById('education_sec').style.display='none';
+    }
+   }
+
+      function exp_f(){
+    
+     let exp_li = document.createElement('li');
+     exp_li.innerHTML = exp.value;
+     
+     document.getElementById('exp_table').appendChild(exp_li);
+
+      }
+
+      function remove_exp(){
+        let exp = document.getElementById('exp_table');
+        exp.removeChild(exp.lastElementChild);
+
+} 
+
+function exp_check(){
+  
+  let check=document.getElementById('exp_checkbox');
+  if( check.checked==true){
+    document.getElementById('exp_sec').style.display='block';
+  }
+  else{
+    document.getElementById('exp_sec').style.display='none';
+  }
+ 
+
+}
+
+
+function project_f(){
+  let pro = document.getElementById('pro');
+     
+    
+     let pro_li = document.createElement('li');
+     pro_li.innerHTML = pro.value;
+    
+     document.getElementById('projects').appendChild(pro_li);
+
+      }
+
+      function remove_pro(){
+        let pro = document.getElementById('projects');
+        pro.removeChild(pro.lastElementChild);
+
+} 
+
+function pro_check(){
+  
+    let check=document.getElementById('pro_checkbox');
+    if( check.checked==true){
+      document.getElementById('pro_sec').style.display='block';
+    }
+    else{
+      document.getElementById('pro_sec').style.display='none';
+    }
+   
+
+}
+
+
+function print_f(){
+  document.getElementById('box1').style.display='none';
+  document.getElementById('box2').style.marginLeft='0px';
+  document.getElementById('print').style.display='none';
+  document.getElementById('cv_container').style.padding='0px';
+
+  window.print();
+ 
+
+}
+ </script>
+</body>
+</html>
